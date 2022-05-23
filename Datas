@@ -1,0 +1,208 @@
+1.CREATING DATABASE
+
+CREATE DATABASE library;
+_______________________________________________________________________________________________________
+
+2.CREATING Clients TABLE
+
+CREATE TABLE Clients(
+Client_Id INT,
+Client_First_name VARCHAR(30),
+Client_Last_name VARCHAR(30),
+Client_Phone VARCHAR(10) UNIQUE,
+Client_Age INT CHECK(Client_Age>=15),
+Client_Gender VARCHAR(6),
+Client_Location VARCHAR(25),
+Client_Occupation VARCHAR(50),
+Client_Dob DATE,
+primary key(Client_Id)
+);
+________________________________________________________________________________________________________
+
+3.CREATING Books TABLE
+
+CREATE TABLE Books(
+Book_Id INT,
+Book_Name VARCHAR(50),
+Book_Domain VARCHAR(25),
+PRIMARY KEY(Book_Id),
+ FOREIGN KEY(Book_Id)REFERENCES Clients(Client_id)
+);
+_________________________________________________________________________________________________________
+
+4.CREATING ACTIVE READERS TABLE
+
+CREATE TABLE Active_readers(
+Ar_Id INT,
+Client_Id INT,
+Book_Id INT,
+Ar_Status VARCHAR(10),
+PRIMARY KEY(Ar_Id),
+FOREIGN KEY(Client_Id)REFERENCES Clients(Client_Id),
+FOREIGN KEY(Book_Id)REFERENCES Books(Book_id)
+);
+__________________________________________________________________________________________________________
+
+5.CREATING BOOK ISSUED TABLE
+
+CREATE TABLE Book_Issued(
+Issue_No INT,
+Ar_Id INT,
+Book_Id INT,
+Book_Name VARCHAR(50),
+No_of_book_issued INT,
+PRIMARY KEY(Issue_No),
+FOREIGN KEY(Ar_id)REFERENCES Active_readers(Ar_Id),
+FOREIGN KEY(Book_Id)REFERENCES Books(Book_ID)
+);
+____________________________________________________________________________________________________________
+
+6. INSERTING VALUES INTO Clients Table
+
+INSERT INTO clients(Client_Id,Client_First_name,Client_Last_name,Client_phone,Client_Age,Client_Gender,Client_Location,Client_Occupation,Client_Dob)
+VALUES(110032,"Mohit","Pattnayak",7205038770,25,"Male","Bangalore","Student",'1996-09-16'),
+(110033,"Shweta","Patnaik",7978625489,23,"Female","Chandigarh","Student",'1998-10-23'),
+(110034,"Sidharth","Mandal",8763280989,24,"Male","Bangalore","Job",'1997-08-04'),
+(110035,"Nayan","Sarkar",9437358382,22,"Male","Mumbai","Intern",'1999-04-18'),
+(110036,"Rakesh","Pandey",6005469854,22,"Male","Pune","Job",'1999-02-21'),
+(110037,"Rekha","Sharma",8763365489,25,"Female","Hyderabad","Intern",'1996-11-13'),
+(110038,"Dhruv","Rathee",9658912354,24,"Male","Bangalore","Job",'1997-02-27'),
+(110039,"Nirmal","Panda",9654235879,24,"Male","Mumbai","Job",'1997-03-30'),
+(110040,"Aryan","Khan",8965423548,23,"Male","Mumbai","Student",'1998-03-28'),
+(110041,"Sai","Krishna",9436587964,23,"Male","Hyderabad","Intern",'1998-04-15'),
+(110042,"P.","BhagyaLaxmi",8765236548,25,"Female","Chennai","Student",'1996-05-17'),
+(110043,"Raunak","Acharya",7854659542,26,"Male","Pune","Job",'1995-06-15'),
+(110044,"Nisha","Madhulika",6598758945,27,"Female","Pune","Intern",'1994-07-19'),
+(110045,"Gyaan","Sharma",9456254862,28,"Male","Hyderabad","Student",'1993-07-1'),
+(110046,"Rekha","Shavant",7865895458,27,"Female","Pune","Intern",'1994-06-2'),
+(110047,"Mohit","Khanna",6543258976,26,"Male","Bangalore","Student",'1995-06-3'),
+(110048,"Krutika","Banerjee",6325489785,26,"Female","Mumbai","Intern",'1995-07-12'),
+(110049,"Shweta","Chaterjee",7758966845,27,"Female","Hyderabad","Student",'1994-05-13'),
+(110050,"Veer","Singh",6688995485,26,"Male","Mumbai","job",'1995-12-18'),
+(110051,"Satvik","Narayan",6654879542,25,"Male","Bangalore","Intern",'1996-11-15'),
+(110052,"Fatima","Begum",9658996548,24,"Female","Bangalore","job",'1997-1-14');
+_________________________________________________________________________________________________________________________________________________________________
+
+7. INSERTING DATAS INTO BOOKS TABLE
+
+INSERT INTO Books(Book_Id,Book_Name,Book_Domain)
+VALUES(1732,"Greta Garbo in Anna Karenina","Story"),
+(1734,"To Kill a Mockingbird","Story"),
+(1735,"The Great Gatsby","Story"),
+(1736,"One Hundred Years of Solitude","Story"),
+(1737,"Beloved","Story"),
+(1738,"The Guns of August","Historical"),
+(1739,"The Liberation Trilogy","Historical"),
+(1740,"The Crusades","Historical"),
+(1741,"Caesar and Christ","Historical"),
+(1742,"A History of American People","Historical"),
+(1743,"The Origin of Species","Science"),
+(1744,"What Evolution Is","Science"),
+(1745,"On Growth and Form","Science"),
+(1746,"Double Helix","Science"),
+(1747,"The Structure of Scientific Revolutions","Science");
+___________________________________________________________________________________________________________________________________________________________________
+
+8.INSERTING INTO Active_readers
+
+INSERT INTO active_readers(Ar_Id,Client_id,Book_Id,Ar_Status)
+VALUES(197,110032,1732,"ACTIVE"),
+(198,110033,1733,"ACTIVE"),
+(199,110034,1732,"TERMINATED"),
+(200,110035,1735,"ACTIVE"),
+(201,110036,1733,"ACTIVE"),
+(202,110037,1735,"TERMINATED"),
+(203,110038,1740,"ACTIVE"),
+(204,110039,1734,"ACTIVE"),
+(205,110040,1736,"TERMINATED"),
+(206,110041,1732,"ACTIVE"),
+(207,110042,1732,"TERMINATED"),
+(208,110043,1737,"ACTIVE"),
+(209,110044,1734,"TERMINATED"),
+(210,110045,1747,"ACTIVE"),
+(211,110046,1738,"TERMINATED"),
+(212,110047,1746,"ACTIVE"),
+(213,110048,1733,"ACTIVE"),
+(214,110049,1739,"ACTIVE"),
+(215,110050,1733,"TERMINATED"),
+(216,110051,1742,"ACTIVE"),
+(217,110052,1742,"ACTIVE"),
+(218,110032,1742,"ACTIVE"),
+(219,110033,1744,"TERMINATED"),
+(220,110034,1733,"ACTIVE"),
+(221,110035,1734,"ACTIVE"),
+(222,110036,1745,"ACTIVE"),
+(223,110037,1741,"ACTIVE"),
+(224,110038,1734,"ACTIVE"),
+(225,110039,1733,"TERMINATED"),
+(226,110040,1734,"TERMINATED"),
+(227,110041,1732,"ACTIVE"),
+(228,110042,1732,"TERMINATED"),
+(229,110043,1734,"ACTIVE"),
+(230,110044,1732,"TERMINATED"),
+(231,110045,1734,"ACTIVE"),
+(232,110046,1732,"ACTIVE"),
+(233,110047,1733,"ACTIVE"),
+(234,110048,1734,"TERMINAETD");
+___________________________________________________________________________________________________________________________________________________________________________
+9. INSERTING INTO BOOK ISSUED
+
+INSERT INTO book_issued(issue_no,Ar_Id,Book_Id,Book_Name,No_of_book_issued)
+VALUES(12,197,1732,"What Evolution Is",5),
+(13,198,1733,"Beloved",1),
+(14,199,1734,"What Evolution Is",1),
+(15,200,1735,"The Guns of August",2),
+(16,201,1736,"The Guns of August",2),
+(17,202,1737,"What Evolution Is",1),
+(18,203,1738,"Caesar and Christ",8),
+(19,204,1739,"Caesar and Christ",6),
+(20,205,1740,"To Kill a Mockingbird",7),
+(21,206,1741,"Caesar and Christ",8),
+(22,207,1742,"What Evolution Is",0),
+(23,208,1743,"Caesar and Christ",1),
+(24,209,1744,"What Evolution Is",4),
+(25,210,1745,"Caesar and Christ",5),
+(26,211,1746,"The Origin of Species",4),
+(27,212,1747,"What Evolution Is",3),
+(28,213,1747,"The Origin of Species",2),
+(29,214,1746,"The Structure of Scientific Revolutions",2),
+(30,215,1745,"Double Helix",1),
+(31,216,1744,"The Origin of Species",1),
+(32,217,1743,"What Evolution Is",1),
+(33,218,1742,"The Origin of Species",1),
+(34,219,1741,"What Evolution Is",1),
+(35,220,1740,"The Origin of Species",2),
+(36,221,1739,"What Evolution Is",2),
+(37,222,1738,"The Origin of Species",4);
+
+_____________________________________________________________________________________________________________________________________________________________________________
+10. ADDING FROEIGN KEYS
+
+ALTER TABLE clients
+ADD FOREIGN Key (Book_Id) REFERENCES books(Book_Id);
+ALTER TABLE clients
+ADD FOREIGN Key (Ar_Id) REFERENCES active_readers(Ar_Id);
+ALTER TABLE clients
+ADD FOREIGN Key (Issue_No) REFERENCES book_issued(Issue_No);
+
+____________________________________________________________________________________________________________________________________________________________________________
+
+***************
+QUERIES       *
+*******       *
+SHOWING TABLES*
+***************
+1.Clients TABLE
+SELECT * FROM clients;
+
+2.Books TABLE
+SELECT * FROM books;
+
+3.Book Issued
+SELECT * FROM book_issued;
+
+4.Active_Readers
+SELECT * FROM active_readers;
+
+5.Count no of Active Users;
+SELECT COUNT(Ar_id) FROM active_readers Where Ar_Status="Active";
